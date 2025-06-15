@@ -23,4 +23,4 @@ COPY tests /housing_prices/tests
 
 WORKDIR /housing_prices
 
-CMD ["python3", "-m", "pytest", "-v"]
+CMD ["/bin/sh", "-c", "coverage run -m pytest -v && coverage xml -o /artifacts/coverage.xml && coverage html -d /artifacts/htmlcov"]
