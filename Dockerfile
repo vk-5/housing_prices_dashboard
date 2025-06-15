@@ -1,6 +1,7 @@
-ARG PYTHON=python:3.10-slim
+ARG PYTHON_VERSION=3.10
+ARG PYTHON_BASE_IMAGE=python:${PYTHON_VERSION}-slim
 
-FROM ${PYTHON} AS builder
+FROM ${PYTHON_BASE_IMAGE} AS builder
 
 WORKDIR /housing_prices
 
@@ -11,7 +12,7 @@ RUN pip install --user -r requirements.txt
 
 COPY . .
 
-FROM ${PYTHON} AS release
+FROM ${PYTHON_BASE_IMAGE} AS release
 
 RUN useradd -m appuser
 
@@ -21,7 +22,7 @@ COPY --from=builder /root/.local /home/appuser/.local
 COPY --from=builder /housing_prices /housing_prices
 
 ENV PATH="/home/appuser/.local/bin:$PATH" \
-    PYTHONPATH="/home/appuser/.local/lib/python3.10/site-packages"
+    PYTHONPATH="/home/appuser/.local/lib/python${PYTHON_VERSION}/site-packages"
 
 RUN chown -R appuser:appuser /housing_prices
 USER appuser
@@ -45,7 +46,7 @@ COPY --from=builder /housing_prices /housing_prices
 COPY tests /housing_prices/tests
 
 ENV PATH="/home/appuser/.local/bin:$PATH" \
-    PYTHONPATH="/home/appuser/.local/lib/python3.10/site-packages"
+    PYTHONPATH="/home/appuser/.local/lib/python${PYTHON_VERSION}/site-packages"
 
 RUN chown -R appuser:appuser /housing_prices
 USER appuser
