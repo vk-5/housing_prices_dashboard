@@ -8,7 +8,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./coverage_artifacts:/artifacts
+      - ./coverage_artifacts:/housing_prices/artifacts
     depends_on:
       redis:
         condition: service_healthy
