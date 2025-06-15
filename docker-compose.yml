@@ -16,8 +16,9 @@ services:
       timeout: 10s
       retries: 3
       start_period: 5s
-    env_file:
-      - conf/local.env
+    environment:
+      - HOUSING_PRICES_PRIVATE_KEY=${HOUSING_PRICES_PRIVATE_KEY}
+      - HOUSING_PRICES_REDIS_HOST=${HOUSING_PRICES_REDIS_HOST}
 
   redis:
     image: redis:6.2.0-alpine

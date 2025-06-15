@@ -9,7 +9,7 @@ class Monitoring:
 
     readiness = False
 
-    def __new__(cls, *args: Any, **kwargs: Any):
+    def __new__(cls, *args: Any, **kwargs: Any) -> "Monitoring":
         raise RuntimeError("Monitoring is a singleton")
 
 
