@@ -48,7 +48,7 @@ ENV PATH="/home/appuser/.local/bin:$PATH" \
     PYTHONPATH="/home/appuser/.local/lib/python3.10/site-packages"
 
 RUN chown -R appuser:appuser /housing_prices
-RUN mkdir -p /artifacts && chown -R appuser:appuser /artifacts
+RUN mkdir -p /artifacts && chmod -R a+w /artifacts
 USER appuser
 
 CMD ["/bin/sh", "-c", "coverage run -m pytest -v && coverage xml -o /artifacts/coverage.xml && coverage html -d /artifacts/htmlcov"]
