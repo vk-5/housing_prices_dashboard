@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: .
+      target: builder
+    image: housing_prices:latest
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      redis:
+        condition: service_healthy
+    env_file:
+      - conf/local.env
+
+  redis:
+    image: redis:6.2.0-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+
+networks:
+  housing_prices-net:
+    driver: bridge
