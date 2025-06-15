@@ -7,6 +7,8 @@ services:
     restart: no
     ports:
       - "8000:8000"
+    volumes:
+      - ./coverage_artifacts:/artifacts
     depends_on:
       redis:
         condition: service_healthy
