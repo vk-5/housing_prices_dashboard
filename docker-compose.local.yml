@@ -10,6 +10,12 @@ services:
     depends_on:
       redis:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/monitoring/readiness"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
     env_file:
       - conf/local.env
 

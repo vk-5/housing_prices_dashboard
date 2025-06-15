@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     """Class for storing env variables, should be used as singleton though `get_settings`"""
 
     private_key: str = ""
+    redis_host: str = ""
 
     class Config:
         """Config class"""

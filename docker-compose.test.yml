@@ -12,7 +12,12 @@ services:
         condition: service_healthy
     env_file:
       - conf/local.env
-
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/monitoring/readiness"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
   redis:
     image: redis:6.2.0-alpine
     ports:

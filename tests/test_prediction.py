@@ -85,7 +85,7 @@ async def test_predict_rate_limit(client):
 
     headers = {"Authorization": f"Bearer {VALID_TOKEN}"}
 
-    for i in range(5):
+    for _ in range(5):
         response = client.get("/predictions/predict", params=VALID_PARAMS, headers=headers)
 
         assert response.status_code == 200
