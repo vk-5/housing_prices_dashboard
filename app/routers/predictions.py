@@ -1,3 +1,5 @@
+from enum import Enum
+
 import pandas as pd
 from fastapi import APIRouter, Depends
 from fastapi_limiter.depends import RateLimiter
@@ -11,10 +13,10 @@ PREDICTION_DECIMAL_PRECISION = 8
 
 router = APIRouter()
 
-from enum import Enum
-
 
 class OceanProximity(str, Enum):
+    """Enumeration of ocean proximity categories."""
+
     LESS_THAN_1H_OCEAN = "<1H OCEAN"
     INLAND = "INLAND"
     ISLAND = "ISLAND"
@@ -23,6 +25,8 @@ class OceanProximity(str, Enum):
 
 
 class HousingPricesParams(BaseModel):
+    """Parameters for predict_housing_price."""
+
     longitude: FiniteFloat
     latitude: FiniteFloat
     housing_median_age: FiniteFloat
