@@ -2,7 +2,7 @@ services:
   app:
     build:
       context: .
-      target: builder
+      target: release
     image: housing_prices:latest
     restart: always
     ports:
